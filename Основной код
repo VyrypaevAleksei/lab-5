@@ -1,0 +1,39 @@
+def caesar_cipher(text, shift):
+    encrypted_text = ""
+    for char in text:
+        if char.isalpha():
+            is_upper = char.isupper()
+            char = char.lower()
+            char_code = ord(char)
+            char_code = (char_code - ord('а') + shift) % 32
+            char = chr(char_code + ord('а'))
+            if is_upper:
+                char = char.upper()
+        encrypted_text += char
+    return encrypted_text
+
+def decrypt_caesar_cipher(encrypted_text, shift):
+    decrypted_text = ""
+    for char in encrypted_text:
+        if char.isalpha():
+            is_upper = char.isupper()
+            char = char.lower()
+            char_code = ord(char)
+            char_code = (char_code - ord('а') - shift) % 32
+            char = chr(char_code + ord('а'))
+            if is_upper:
+                char = char.upper()
+        decrypted_text += char
+    return decrypted_text
+
+# Получаем входные данные от пользователя
+input_text = input("Введите текст на русском: ")
+shift = int(input("Введите шаг сдвига: "))
+
+# Шифрование текста
+encrypted_text = caesar_cipher(input_text, shift)
+print("Зашифрованный текст:", encrypted_text)
+
+# Расшифрование текста
+decrypted_text = decrypt_caesar_cipher(encrypted_text, shift)
+print("Расшифрованный текст:", decrypted_text)
