@@ -1,33 +1,35 @@
 def caesar_cipher(text, shift):
     encrypted_text = ""
     for char in text:
-        if char.isalpha() and ord(char) >= ord('а') and ord(char) <= ord('я'):
+        if char.isalpha():
             is_upper = char.isupper()
             char = char.lower()
-            char_code = ord(char)
-            char_code = (char_code - ord('а') + shift) % 32
-            char = chr(char_code + ord('а'))
+            if 'а' <= char <= 'я':
+                char_code = ord(char)
+                char_code = (char_code - ord('а') + shift) % 32
+                char = chr(char_code + ord('а'))
             if is_upper:
                 char = char.upper()
             encrypted_text += char
         else:
-            raise ValueError("Введен некорректный символ")
+            encrypted_text += char
     return encrypted_text
 
 def decrypt_caesar_cipher(encrypted_text, shift):
     decrypted_text = ""
     for char in encrypted_text:
-        if char.isalpha() and ord(char) >= ord('а') and ord(char) <= ord('я'):
+        if char.isalpha():
             is_upper = char.isupper()
             char = char.lower()
-            char_code = ord(char)
-            char_code = (char_code - ord('а') - shift) % 32
-            char = chr(char_code + ord('а'))
+            if 'а' <= char <= 'я':
+                char_code = ord(char)
+                char_code = (char_code - ord('а') - shift) % 32
+                char = chr(char_code + ord('а'))
             if is_upper:
                 char = char.upper()
             decrypted_text += char
         else:
-            raise ValueError("Введен некорректный символ")
+            decrypted_text += char
     return decrypted_text
 
 input_text = input("Введите текст на русском: ")
